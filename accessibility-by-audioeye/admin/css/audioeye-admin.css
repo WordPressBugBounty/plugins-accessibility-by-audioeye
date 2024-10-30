@@ -109,6 +109,11 @@
   margin-bottom: 21px;
 }
 
+.ae-logo svg {
+  width: 160px;
+  height: auto;
+}
+
 .ae-Card p.ae-subtitle {
   font-size: 14px;
   line-height: 21px;

@@ -2,9 +2,9 @@
 Contributors: netopsae
 Donate link: www.audioeye.com
 Tags: accessibility, wcag, ada, compliance, monitoring
-Requires at least: 5.1
-Tested up to: 6.4.2
-Stable tag: 1.0.7
+Requires at least: 5
+Tested up to: 6
+Stable tag: 1.0.48
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
