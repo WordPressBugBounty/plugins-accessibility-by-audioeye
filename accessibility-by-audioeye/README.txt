@@ -1,10 +1,10 @@
-=== Plugin Name ===
+=== Accessibility by AudioEye ===
 Contributors: netopsae
 Donate link: www.audioeye.com
 Tags: accessibility, wcag, ada, compliance, monitoring
-Requires at least: 5
-Tested up to: 6
-Stable tag: 1.0.48
+Requires at least: 5.1
+Tested up to: 6.6.2
+Stable tag: 1.0.49
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
