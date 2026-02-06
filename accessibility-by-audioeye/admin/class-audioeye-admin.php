@@ -63,6 +63,11 @@ class Audioeye_Admin {
 	}
 
 	public function post_first() {
+		// Check user capabilities - only administrators can update plugin settings
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Unauthorized access.' );
+		}
+
 		if ( !isset($_POST['nonce']) ) {
 			exit;
 		}
