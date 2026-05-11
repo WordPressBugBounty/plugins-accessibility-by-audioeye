@@ -60,15 +60,17 @@ class Audioeye_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		$options = get_option('audioeye_config');
+		$options = get_option( 'audioeye_config', array() );
 
-		if (false === $options) {
+		if ( ! is_array( $options ) ) {
 			return;
 		}
 
-		if (isset($options['site_hash']) && $options['site_hash']) {
+		if ( isset( $options['site_hash'] ) && $options['site_hash'] ) {
+			$cdn_host    = audioeye_effective_use_wsv3_cdn( $options ) ? AUDIOEYE_CDN_HOST_WSV3 : AUDIOEYE_CDN_HOST_LEGACY;
+			$script_src  = 'https://' . $cdn_host . '/aem.js';
 			?>
-			<script type="text/javascript">!function(){var b=function(){window.__AudioEyeInstallSource="wordpress"; window.__AudioEyeSiteHash="<?php echo esc_js( $options['site_hash'] ) ?>"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script>
+			<script type="text/javascript">!function(){var b=function(){window.__AudioEyeInstallSource="wordpress"; window.__AudioEyeSiteHash="<?php echo esc_js( $options['site_hash'] ) ?>"; var a=document.createElement("script");a.src="<?php echo esc_url( $script_src, array( 'https' ) ) ?>";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script>
 			<?php
 		} else {
 			return;

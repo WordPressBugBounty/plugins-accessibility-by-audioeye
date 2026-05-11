@@ -367,3 +367,101 @@ p.ae-need-to-reenter-site-id a svg {
   margin-left: 2px;
   margin-right: -2px;
 }
+
+/* Script CDN (Advanced) — plain section; fixes checkbox forced to block by .ae-Card input */
+.ae-cdn-section {
+  margin-bottom: 32px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 8px;
+  max-width: 100%;
+  padding: 0;
+}
+
+.ae-cdn-onboarding-instructions > p + p {
+  margin-top: 12px;
+}
+
+.ae-cdn-onboarding-instructions code {
+  background-color: #eef2f7;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  padding: 1px 6px;
+}
+
+.ae-cdn-section__body > p {
+  margin: 0 0 12px;
+}
+
+.ae-cdn-section__body > p:last-of-type {
+  margin-bottom: 0;
+}
+
+.ae-cdn-section code {
+  background-color: #eef2f7;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  padding: 1px 6px;
+}
+
+.ae-cdn-form {
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.ae-cdn-toggle-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ae-cdn-toggle-row input[type='checkbox'] {
+  display: inline-block;
+  flex-shrink: 0;
+  height: 18px;
+  margin: 5px 0 0;
+  width: 18px;
+}
+
+.ae-cdn-toggle-row label {
+  cursor: pointer;
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  margin: 0;
+}
+
+.ae-cdn-form-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ae-cdn-save-button {
+  background-color: #fff;
+  border: 1px solid #366eb0;
+  border-radius: 4px;
+  color: #366eb0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 13px 36px;
+  width: 300px;
+}
+
+.ae-cdn-save-button:hover {
+  background-color: #e6f1f8;
+  color: #234670;
+}
+
+.ae-cdn-saved {
+  color: #2a8f75;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+}

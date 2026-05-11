@@ -70,7 +70,7 @@ class Audioeye {
 		if ( defined( 'AUDIOEYE_VERSION' ) ) {
 			$this->version = AUDIOEYE_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '1.2.0';
 		}
 		$this->plugin_name = 'audioeye';
 
@@ -156,6 +156,7 @@ class Audioeye {
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_admin_page' );
 		$this->loader->add_action('wp_ajax_post_first', $plugin_admin, 'post_first');
+		$this->loader->add_action( 'wp_ajax_audioeye_save_cdn', $plugin_admin, 'audioeye_save_cdn' );
     // $this->loader->add_action('admin_post_nopriv_post_first', $plugin_admin, 'post_first');
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );

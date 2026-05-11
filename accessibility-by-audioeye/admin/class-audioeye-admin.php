@@ -82,11 +82,50 @@ class Audioeye_Admin {
 			exit;
 		}
 
-		update_option('audioeye_config', array(
-			'site_hash' => sanitize_text_field( wp_unslash( $_POST['site_hash'] ) )
-		));
+		$existing = get_option( 'audioeye_config', array() );
+		if ( ! is_array( $existing ) ) {
+			$existing = array();
+		}
+
+		$use_wsv3_cdn = array_key_exists( 'use_wsv3_cdn', $existing )
+			? (bool) $existing['use_wsv3_cdn']
+			: audioeye_effective_use_wsv3_cdn( $existing );
+
+		$config = array(
+			'site_hash'      => sanitize_text_field( wp_unslash( $_POST['site_hash'] ) ),
+			'use_wsv3_cdn'   => $use_wsv3_cdn,
+		);
+		update_option( 'audioeye_config', $config );
 
 		exit;
+	}
+
+	/**
+	 * Save CDN hostname preference (AJAX).
+	 */
+	public function audioeye_save_cdn() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Unauthorized access.' ), 403 );
+		}
+
+		if ( ! isset( $_POST['nonce'] ) ) {
+			wp_send_json_error( array( 'message' => 'Missing nonce.' ), 400 );
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ) );
+		if ( ! wp_verify_nonce( $nonce, 'ajax-nonce' ) ) {
+			wp_send_json_error( array( 'message' => 'Nonce validation failed.' ), 403 );
+		}
+
+		$existing = get_option( 'audioeye_config', array() );
+		if ( ! is_array( $existing ) ) {
+			$existing = array();
+		}
+
+		$existing['use_wsv3_cdn'] = isset( $_POST['use_wsv3_cdn'] ) && '1' === $_POST['use_wsv3_cdn'];
+		update_option( 'audioeye_config', $existing );
+
+		wp_send_json_success();
 	}
 
 	/**

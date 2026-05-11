@@ -9,13 +9,13 @@
  * that starts the plugin.
  *
  * @link              www.audioeye.com
- * @since             1.1.0
+ * @since             1.2.0
  * @package           AudioEye
  *
  * @wordpress-plugin
  * Plugin Name:       Accessibility by Audioeye
  * Description:       AudioEye automatically finds and fixes common accessibility issues on your site. This plugin provides an easy way to install AudioEye's accessibility solution on WordPress.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            AudioEye
  * Author URI:        www.audioeye.com
  * License:           GPL-2.0+
@@ -31,7 +31,11 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'AUDIOEYE_VERSION', '1.1.0' );
+define( 'AUDIOEYE_VERSION', '1.2.0' );
+define( 'AUDIOEYE_CDN_HOST_LEGACY', 'wsmcdn.audioeye.com' );
+define( 'AUDIOEYE_CDN_HOST_WSV3', 'wsv3cdn.audioeye-services.com' );
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/audioeye-functions.php';
 
 function activate_audioeye() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-audioeye-activator.php';

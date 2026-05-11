@@ -4,7 +4,7 @@ Donate link: www.audioeye.com
 Tags: accessibility, wcag, ada, compliance, monitoring
 Requires at least: 5.1
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,9 @@ You will get your first AudioEye Accessibility Score the moment you install Audi
 
 Technology can’t do it alone. With advanced plans, AudioEye has a team of certified accessibility experts who can help you throughout your accessibility journey. For those issues that we cannot fix automatically, we show you what the issue is, and how to address it on your site. If a lawsuit occurs, AudioEye is here to support you every step of the way.
 
-Note: Use of the AudioEye plugin requires an active subscription to an AudioEye Plan. See pricing [here](https://www.audioeye.com/plans-and-pricing). A link to sign up for a new account is presented during the plugin activation process. To log into an existing AudioEye account, you will need to provide your AudioEye Site ID. 
+Note: Use of the AudioEye plugin requires an active subscription to an AudioEye Plan. See pricing [here](https://www.audioeye.com/plans-and-pricing). A link to sign up for a new account is presented during the plugin activation process. To log into an existing AudioEye account, you will need to provide your AudioEye Site ID.
+
+Script delivery (CDN): AudioEye loads the storefront script (`aem.js`) from `wsmcdn.audioeye.com` by default today. We are migrating to `wsv3cdn.audioeye-services.com`. New setups without a saved Site ID use the new host by default; sites that already had a Site ID saved before the CDN preference existed keep the legacy host until an administrator enables the new host under AudioEye → Script CDN (Advanced) after allowlisting the new URL in any Content Security Policy (`script-src`, etc.). On first run, the plugin includes an optional onboarding step that explains how to allowlist the new host in your CSP.
 
 Features included in all AudioEye base plans:
 
@@ -75,4 +77,12 @@ With AudioEye, we automatically find and fix the majority of common accessibilit
 
 == Changelog ==
 
+= 1.2.0 =
+* CDN migration: Documented and shipped admin guidance for moving storefront script delivery from `wsmcdn.audioeye.com` (legacy) to `wsv3cdn.audioeye-services.com`. The legacy host remains the default for existing installs until you opt in; new installs without a saved Site ID default to the new host. Use AudioEye → Script CDN (Advanced) to save your preference after updating your Content Security Policy (`script-src` and any other directives your site requires for third-party scripts).
+* Onboarding: First-run flow adds step "2. Optional: add our script host to your CSP allowlist" before you enter your Site ID, so teams can update policies before go-live.
+* Admin UI: Script CDN (Advanced) on the active settings screen is a plain section with migration copy, checkbox, and save (no accordion). CDN preference can be saved before or after entering a Site ID.
+
 == Upgrade Notice ==
+
+= 1.2.0 =
+If you use a Content Security Policy, allowlist `https://wsv3cdn.audioeye-services.com` for scripts, then open AudioEye → Script CDN (Advanced) to opt in when you are ready. Existing sites keep loading from `wsmcdn.audioeye.com` until you enable the new host.

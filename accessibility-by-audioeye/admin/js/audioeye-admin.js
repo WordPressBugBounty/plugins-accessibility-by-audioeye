@@ -58,5 +58,37 @@
 				$(".ae-result").html( "<h2>Something went wrong.</h2><br>" );         
 			});
 		});
+
+		$( '.ae-cdn-form' ).on( 'submit', function( event ) {
+			event.preventDefault();
+			const self = this;
+			const ajaxData = $( self ).serialize() + '&nonce=' + encodeURIComponent( params.nonce );
+
+			$.ajax( {
+				url: params.ajaxurl,
+				type: 'post',
+				data: ajaxData
+			} )
+			.done( function( response ) {
+				if ( response && response.success ) {
+					const checked = $( self ).find( 'input[name="use_wsv3_cdn"][type="checkbox"]' ).prop( 'checked' );
+					$( '.ae-cdn-form input[name="use_wsv3_cdn"][type="checkbox"]' ).prop( 'checked', checked );
+					const $saved = $( self ).find( '.ae-cdn-saved' );
+					$saved.removeAttr( 'hidden' );
+					setTimeout( function() {
+						$saved.attr( 'hidden', 'hidden' );
+					}, 3000 );
+				} else {
+					window.alert( ( response && response.data && response.data.message ) ? response.data.message : 'Could not save CDN preference.' );
+				}
+			} )
+			.fail( function( jqXHR ) {
+				let msg = 'Could not save CDN preference.';
+				if ( jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.message ) {
+					msg = jqXHR.responseJSON.data.message;
+				}
+				window.alert( msg );
+			} );
+		} );
 	});
 })( jQuery );

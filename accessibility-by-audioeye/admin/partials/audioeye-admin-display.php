@@ -13,8 +13,12 @@
  */
 
 $_nonce = wp_create_nonce('my_post_form_nonce');
-$options = get_option('audioeye_config', array());
-$site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
+$options = get_option( 'audioeye_config', array() );
+if ( ! is_array( $options ) ) {
+	$options = array();
+}
+$site_hash    = isset( $options['site_hash'] ) ? $options['site_hash'] : null;
+$use_wsv3_cdn = audioeye_effective_use_wsv3_cdn( $options );
 ?>
 
 <section class="ae-step-one <?php if ($site_hash) {
@@ -63,7 +67,7 @@ $site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
 
       </div>
 
-      <h1>Congratulations! Just 2 more steps...</h1>
+      <h1>Congratulations! Just 3 more steps...</h1>
       <p class="ae-subtitle">Activate AudioEye to enable automated accessibility fixes, your Usability Toolbar, and
         more!</p>
 
@@ -94,7 +98,11 @@ $site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
 
       <div class="ae-step-one-spacer"></div>
 
-      <h2>2. Enter your AudioEye Site ID</h2>
+      <?php require __DIR__ . '/audioeye-admin-cdn-onboarding-instructions.php'; ?>
+
+      <div class="ae-step-one-spacer"></div>
+
+      <h2>3. Enter your AudioEye Site ID</h2>
       <div class="ae-indent-content">
         <p>Every site in your AudioEye account has its own Site ID.<br />Your Site ID is available under
           <i>Installation</i>.
@@ -115,6 +123,7 @@ $site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
           ?>
         </form>
       </div>
+
     </div>
     <a class="ae-help-link"
       href="https://help.audioeye.com/hc/en-us?utm_source=wordpressPlugInIntegration&utm_medium=audioeyeIntegrationReferral"
@@ -232,6 +241,7 @@ $site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
           </a>.</p>
       </div>
 
+      <?php require __DIR__ . '/audioeye-admin-cdn-section.php'; ?>
 
       <h2>If you need to re-enter your Site ID...</h2>
       <p class="ae-need-to-reenter-site-id">Your Site ID can be found in the <a
@@ -372,6 +382,8 @@ $site_hash = isset($options['site_hash']) ? $options['site_hash'] : null;
           <span>Configure site options</span>
         </li>
       </ul>
+
+      <?php require __DIR__ . '/audioeye-admin-cdn-section.php'; ?>
 
       <h2>If you need to re-enter your Site ID...</h2>
       <p class="ae-need-to-reenter-site-id">Your Site ID can be found in the <a
